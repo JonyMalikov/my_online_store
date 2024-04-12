@@ -5,8 +5,8 @@ from django.urls import reverse
 class Category(models.Model):
     """Категория"""
 
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True)
+    name = models.CharField(max_length=200, verbose_name="название")
+    slug = models.SlugField(max_length=200, unique=True, verbose_name="слаг")
 
     class Meta:
         ordering = ["name"]
@@ -28,16 +28,23 @@ class Product(models.Model):
     """Продукт"""
 
     category = models.ForeignKey(
-        Category, related_name="products", on_delete=models.CASCADE
+        Category,
+        related_name="products",
+        on_delete=models.CASCADE,
+        verbose_name="категория",
     )
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200)
-    image = models.ImageField(blank=True, upload_to="products/%Y/%m/%d")
-    description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    available = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    name = models.CharField(max_length=200, verbose_name="название")
+    slug = models.SlugField(max_length=200, verbose_name="слаг")
+    image = models.ImageField(
+        blank=True, upload_to="products/%Y/%m/%d", verbose_name="изображение"
+    )
+    description = models.TextField(blank=True, verbose_name="описание")
+    price = models.DecimalField(
+        max_digits=10, decimal_places=2, verbose_name="цена"
+    )
+    available = models.BooleanField(default=True, verbose_name="доступен")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="создан")
+    updated = models.DateTimeField(auto_now=True, verbose_name="обновлен")
 
     class Meta:
         ordering = ["name"]
