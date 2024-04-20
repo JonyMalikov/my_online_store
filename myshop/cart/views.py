@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 from shop.models import Product
 
@@ -21,6 +21,7 @@ def cart_add(request, product_id):
         )
     return redirect("cart:cart_detail")
 
+
 @require_POST
 def cart_remove(request, product_id):
     """Удаление продукта из корзины"""
@@ -29,7 +30,8 @@ def cart_remove(request, product_id):
     cart.remove(product)
     return redirect("cart:cart_detail")
 
+
 def cart_detail(request):
     """подробная информация о корзине"""
-    cart = Cart(request
-    return render(request, "cart/detail.html", {"cart": cart}))
+    cart = Cart(request)
+    return render(request, "cart/detail.html", {"cart": cart})
