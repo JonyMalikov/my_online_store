@@ -5,6 +5,8 @@ from shop.models import Product
 
 
 class Cart:
+    """Корзина"""
+
     def __init__(self, request):
         """Инициализация корзины"""
         self.session = request.session
