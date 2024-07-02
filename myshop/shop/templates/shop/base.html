@@ -20,8 +20,10 @@
           {% if total_items > 0 %}
             Ваша корзина:
             <a href="{% url 'cart:cart_detail' %}">{{ total_items }} товаров{{ total_items|pluralize }}, ₽{{ cart.get_total_price }}</a>
+            {% comment %}
           {% else %}
-            Ваша корзина пуста.
+            {% endcomment %}
+            {% elif not order %}Ваша корзина пуста.
           {% endif %}
         {% endwith %}
       </div>
